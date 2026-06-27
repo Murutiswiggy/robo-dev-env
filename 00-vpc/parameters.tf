@@ -8,6 +8,6 @@ resource "aws_ssm_parameter" "vpc_id" {
 resource "aws_ssm_parameter" "private_sub_ids" {
   name  = "/${var.project}/${var.environment}/private_ids"
   type  = "String"
-  value = join("," ,module.vpc.private_ids)
+  value = join("," ,module.vpc.private_sub_ids)
   overwrite = true
 }
