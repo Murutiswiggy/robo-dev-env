@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "Partition Number: ${partition_number}"
+echo "Extend Size: ${extend_size}G"
+
+sudo growpart /dev/nvme0n1 ${partition_number}
+
+sudo pvresize /dev/nvme0n1p${partition_number}
+
+sudo lvextend -L +${extend_size}G /dev/mapper/RootVG-homeVol
+
+sudo xfs_growfs /
+
+
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install terraform
