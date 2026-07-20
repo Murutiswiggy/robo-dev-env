@@ -10,5 +10,5 @@ touch /var/log/roboshop/ansible.log
 
 cd /home/ec2-user
 git clone https://github.com/Murutiswiggy/robo-ansible-v3.git
-cd roboshop-ansible-v3
+cd robo-ansible-v3
 ansible-playbook -e component=$component -e environment=$environment roboshop.yaml
