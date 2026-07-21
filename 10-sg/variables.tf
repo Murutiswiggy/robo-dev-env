@@ -19,11 +19,11 @@ variable "sg_names" {
    ]
 }
 
-variable "components" {
-  type = list(string)
-  default = [ 
-   "mongodb", "redis", "mysql", "rabbitmq",
-    "catalogue", "user", "cart", "shipping", "payment",
+# variable "components" {
+#   type = list(string)
+#   default = [ 
+#    "mongodb", "redis", "mysql", "rabbitmq",
+#     "catalogue", "user", "cart", "shipping", "payment",
   
-]
-}
+# ]
+# }

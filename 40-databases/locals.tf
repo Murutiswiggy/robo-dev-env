@@ -1,6 +1,9 @@
 locals {
     mongodb_sg_id = data.aws_ssm_parameter.mongodb_sg_id.value
-    # redis_sg_id = data.aws_ssm_parameter.redis_sg_id.value
+    redis_sg_id = data.aws_ssm_parameter.redis_sg_id.value
+    # mysql = data.aws_ssm_parameter.mysql_sg_id.value
+    rabbitmq_sg_id = data.aws_ssm_parameter.rabbitmq_sg_id.value
+
     common_name = "${var.project}-${var.environment}"
     ami_id = data.aws_ami.redhat_ami.id
     database_sub_id = split("," , data.aws_ssm_parameter.database_sub_ids.value)[0]
