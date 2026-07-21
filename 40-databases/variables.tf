@@ -14,6 +14,10 @@ variable "domain_name" {
   default = "computerservices.co.in"
 }
 
+variable "mysql_root_password" {
+  type = string
+}
+
 # variable "components" {
 #   type = list(string)
 #   default = [ 
