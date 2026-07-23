@@ -169,10 +169,18 @@ resource "terraform_data" "mysql" {
     destination = "/tmp/bootstrap.sh"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/bootstrap.sh",
-      "sudo bash /tmp/bootstrap.sh mysql ${var.environment}"
-    ]
-  }
+#   provisioner "remote-exec" {
+#     inline = [
+#       "chmod +x /tmp/bootstrap.sh",
+#       "sudo bash /tmp/bootstrap.sh mysql ${var.environment}"
+#     ]
+#   }
+# }
+
+
+provisioner "remote-exec" {
+  inline = [
+    "cd /home/ec2-user/robo-ansible-v3",
+    "ansible-playbook mysql.yaml -e env=${var.environment}"
+  ]
 }
