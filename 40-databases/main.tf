@@ -184,3 +184,5 @@ provisioner "remote-exec" {
     "ansible-playbook mysql.yaml -e env=${var.environment}"
   ]
 }
+
+}
