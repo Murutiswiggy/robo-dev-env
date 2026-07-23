@@ -127,7 +127,7 @@ resource "terraform_data" "rabbitmq" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/bootstrap.sh",
-      "sudo bash /tmp/bootstrap.sh rabbitmq ${var.environment}"
+      "sudo sh /tmp/bootstrap.sh rabbitmq ${var.environment}"
     ]
   }
 }
@@ -172,7 +172,7 @@ resource "terraform_data" "mysql" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/bootstrap.sh",
-      "sudo bash /tmp/bootstrap.sh mysql ${var.environment}"
+      "sudo sh /tmp/bootstrap.sh mysql ${var.environment}"
     ]
   }
 }
