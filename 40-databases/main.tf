@@ -161,7 +161,7 @@ resource "terraform_data" "mysql" {
     type        = "ssh"
     user        = "ec2-user"
     password = "DevOps321"
-    host        = aws_instance.rabbitmq.private_ip
+    host        = aws_instance.mysql.private_ip
   }
 
   provisioner "file" {
@@ -169,20 +169,20 @@ resource "terraform_data" "mysql" {
     destination = "/tmp/bootstrap.sh"
   }
 
-#   provisioner "remote-exec" {
-#     inline = [
-#       "chmod +x /tmp/bootstrap.sh",
-#       "sudo bash /tmp/bootstrap.sh mysql ${var.environment}"
-#     ]
-#   }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo bash /tmp/bootstrap.sh mysql ${var.environment}"
+    ]
+  }
+}
+
+
+# provisioner "remote-exec" {
+#   inline = [
+#     "cd /home/ec2-user/robo-ansible-v3",
+#     "ansible-playbook mysql.yaml -e env=${var.environment}"
+#   ]
 # }
 
-
-provisioner "remote-exec" {
-  inline = [
-    "cd /home/ec2-user/robo-ansible-v3",
-    "ansible-playbook mysql.yaml -e env=${var.environment}"
-  ]
-}
-
-}
+# }
