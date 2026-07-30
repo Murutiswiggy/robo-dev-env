@@ -7,9 +7,9 @@ sudo growpart /dev/nvme0n1 ${partition_number}
 
 sudo pvresize /dev/nvme0n1p${partition_number}
 
-sudo lvextend -L +${extend_size}G /dev/mapper/RootVG-homeVol
+sudo lvextend -r -L +${extend_size}G /dev/mapper/RootVG-homeVol
 
-sudo xfs_growfs /
+sudo xfs_growfs /home
 
 
 sudo yum install -y yum-utils
