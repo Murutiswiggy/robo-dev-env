@@ -21,6 +21,11 @@ resource "terraform_data" "catalogue" {
     
   ]
 
+  depends_on = [
+  terraform_data.mongodb,
+  aws_route53_record.mongodb
+]
+
   connection {
     type        = "ssh"
     user        = "ec2-user"
