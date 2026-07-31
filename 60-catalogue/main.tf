@@ -17,12 +17,12 @@ tags = merge(
 
 resource "terraform_data" "catalogue" {
   triggers_replace = [
-    aws_instance.catalogue.id,
+    aws_instance.catalogue.id
     
   ]
 
   depends_on = [
-       aws_instance.mongodb.id
+       aws_instance.mongodb
     ]
 
   connection {
