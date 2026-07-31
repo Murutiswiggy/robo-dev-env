@@ -21,10 +21,6 @@ resource "terraform_data" "catalogue" {
     
   ]
 
-  depends_on = [
-        module.mongodb
-    ]
-
   connection {
     type        = "ssh"
     user        = "ec2-user"
