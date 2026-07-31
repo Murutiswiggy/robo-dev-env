@@ -22,7 +22,7 @@ resource "terraform_data" "catalogue" {
   ]
 
   depends_on = [
-       aws_instance.mongodb
+        module.mongodb
     ]
 
   connection {
