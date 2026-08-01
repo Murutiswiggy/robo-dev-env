@@ -73,7 +73,7 @@ resource "aws_ami_from_instance" "catalogue" {
 
 resource "aws_launch_template" "catalogue" {
   name = "${local.common_name}-catalogue"
-  image_id = "aws_ami_from_instance.catalogue"
+  image_id = "aws_ami_from_instance.catalogue.id"
 
   instance_initiated_shutdown_behavior = "terminate"
 
@@ -115,3 +115,28 @@ resource "aws_launch_template" "catalogue" {
   )
 }
 
+
+
+resource "aws_lb_target_group" "catalogue" {
+  name        = "${local.common_name}-catalogue"
+  port        = 8080
+  protocol    = "HTTP"
+  vpc_id      = local.vpc_id
+  target_type = "instance"
+  deregistration_delay = "30"
+
+  health_check {
+    enabled             = true
+    path                = "/health"
+    protocol            = "HTTP"
+    port                = "8080"
+    interval            = 10
+    timeout             = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
