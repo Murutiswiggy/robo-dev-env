@@ -20,11 +20,6 @@ resource "terraform_data" "catalogue" {
     aws_instance.catalogue.id
     ]
 
-#   depends_on = [
-#   terraform_data.mongodb,
-#   aws_route53_record.mongodb
-# ]
-
   connection {
     type        = "ssh"
     user        = "ec2-user"
@@ -46,8 +41,6 @@ resource "terraform_data" "catalogue" {
 }
 
 
-
-
 resource "aws_ec2_instance_state" "catalogue" {
   instance_id = aws_instance.catalogue.id
   state       = "stopped"
@@ -65,7 +58,7 @@ resource "aws_ami_from_instance" "catalogue" {
         Name = "${local.common_name}-catalogue-${var.app_version}-${aws_instance.catalogue.id}"
     },
     local.common_tags
-)
+ )
 }
 
 
