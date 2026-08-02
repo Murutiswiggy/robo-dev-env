@@ -118,13 +118,13 @@ resource "aws_lb_target_group" "catalogue" {
   deregistration_delay = "30"
 
   health_check {
-    enabled             = true
-    path                = "/health"
-    protocol            = "HTTP"
-    port                = "8080"
-    interval            = 10
-    timeout             = 5
-    healthy_threshold   = 2
+    healthy_threshold = 2
+    interval = 10
+    matcher = "200-299"
+    path = "/health"
+    port = 8080
+    protocol = "HTTP"
+    timeout = 5
     unhealthy_threshold = 2
   }
 
@@ -233,7 +233,7 @@ resource "terraform_data" "catalogue_detestion" {
   depends_on = [ aws_autoscaling_policy.catalogue]
 
   provisioner "local-exec" {
-    command = "aws ec2 terminate-instance --instance-ids ${aws_instance.catalogue.id}"
+    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
     
   }
 }
