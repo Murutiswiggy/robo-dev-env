@@ -69,7 +69,7 @@ resource "aws_launch_template" "catalogue" {
 
   instance_initiated_shutdown_behavior = "terminate"
 
-  instance_type = "t2.micro"
+  instance_type = "t3.micro"
    vpc_security_group_ids = [local.catalogue_sg_id]
    update_default_version = true
 
