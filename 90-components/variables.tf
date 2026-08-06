@@ -1,5 +1,5 @@
 variable "project" {
-    default = roboshop
+    default = "roboshop"
   
 }
 
@@ -16,9 +16,6 @@ variable "domain_name" {
   default = "computerservices.co.in"
 }
 
-variable "app_version" {
-  default = "v3"
-}
 
 variable "components" {
   default = {
