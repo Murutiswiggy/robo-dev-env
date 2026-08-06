@@ -15,6 +15,7 @@ resource "aws_instance" "catalogue" {
 }
 
 
+
 resource "terraform_data" "catalogue" {
   triggers_replace = [
     aws_instance.catalogue.id
@@ -47,6 +48,7 @@ resource "aws_ec2_instance_state" "catalogue" {
   depends_on = [terraform_data.catalogue]
 
 }
+
 
 resource "aws_ami_from_instance" "catalogue" {
   name               = "${local.common_name}-catalogue-${var.app_version}-${aws_instance.catalogue.id}"
