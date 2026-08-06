@@ -1,4 +1,4 @@
-module "component" {
+module "components" {
     for_each = var.components
   source = "git::https://github.com/Murutiswiggy/robo-component.git?ref=main"
   environment = var.environment
