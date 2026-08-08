@@ -40,7 +40,7 @@ variable "components" {
       }
 
         frontend = {
-          rule_priority =10
+          rule_priority =55
           app_version = "v3"
       }
   }
