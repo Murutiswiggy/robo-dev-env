@@ -14,10 +14,10 @@ variable "domain_name" {
 
 variable "components" {
   default = {
-      catalogue = {
-          rule_priority =15
-          app_version = "v3"
-      }
+      # catalogue = {
+      #     rule_priority =15
+      #     app_version = "v3"
+      # }
 
       user = {
           rule_priority =20
