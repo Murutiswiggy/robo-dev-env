@@ -88,94 +88,94 @@ resource "terraform_data" "redis" {
 }
 
 
-# #rabbitmq
-# resource "aws_instance" "rabbitmq" {
-#   ami                         = data.aws_ami.redhat_ami.id
-#   instance_type               = "t3.micro"
-#   subnet_id                   = local.database_sub_id
-#   vpc_security_group_ids      = [local.rabbitmq_sg_id]
-#   associate_public_ip_address = true
+#rabbitmq
+resource "aws_instance" "rabbitmq" {
+  ami                         = data.aws_ami.redhat_ami.id
+  instance_type               = "t3.micro"
+  subnet_id                   = local.database_sub_id
+  vpc_security_group_ids      = [local.rabbitmq_sg_id]
+  associate_public_ip_address = true
 
 
-# tags = merge(
-#     {
-#         Name = "${local.common_name}-rabbitmq"
-#     },
-#     local.common_tags
-# )
-# }
+tags = merge(
+    {
+        Name = "${local.common_name}-rabbitmq"
+    },
+    local.common_tags
+)
+}
 
 
-# #provisioners
-# resource "terraform_data" "rabbitmq" {
-#   triggers_replace = [
-#     aws_instance.rabbitmq.id
-#   ]
+#provisioners
+resource "terraform_data" "rabbitmq" {
+  triggers_replace = [
+    aws_instance.rabbitmq.id
+  ]
 
-#   connection {
-#     type        = "ssh"
-#     user        = "ec2-user"
-#     password = "DevOps321"
-#     host        = aws_instance.rabbitmq.private_ip
-#   }
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    password = "DevOps321"
+    host        = aws_instance.rabbitmq.private_ip
+  }
 
-#   provisioner "file" {
-#     source      = "bootstrap.sh"
-#     destination = "/tmp/bootstrap.sh"
-#   }
+  provisioner "file" {
+    source      = "bootstrap.sh"
+    destination = "/tmp/bootstrap.sh"
+  }
 
-#   provisioner "remote-exec" {
-#     inline = [
-#       "chmod +x /tmp/bootstrap.sh",
-#       "sudo sh /tmp/bootstrap.sh rabbitmq ${var.environment}"
-#     ]
-#   }
-# }
-
-
-# #MySQL
-# resource "aws_instance" "mysql" {
-#   ami                         = data.aws_ami.redhat_ami.id
-#   instance_type               = "t3.micro"
-#   subnet_id                   = local.database_sub_id
-#   vpc_security_group_ids      = [local.mysql_sg_id]
-#   associate_public_ip_address = true
-# iam_instance_profile = aws_iam_instance_profile.mysql_profile.name
-
-# tags = merge(
-#     {
-#         Name = "${local.common_name}-mysql"
-#     },
-#     local.common_tags
-# )
-# }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh rabbitmq ${var.environment}"
+    ]
+  }
+}
 
 
-# #provisioners
-# resource "terraform_data" "mysql" {
-#   triggers_replace = [
-#     aws_instance.mysql.id
-#   ]
+#MySQL
+resource "aws_instance" "mysql" {
+  ami                         = data.aws_ami.redhat_ami.id
+  instance_type               = "t3.micro"
+  subnet_id                   = local.database_sub_id
+  vpc_security_group_ids      = [local.mysql_sg_id]
+  associate_public_ip_address = true
+iam_instance_profile = aws_iam_instance_profile.mysql_profile.name
 
-#   connection {
-#     type        = "ssh"
-#     user        = "ec2-user"
-#     password = "DevOps321"
-#     host        = aws_instance.mysql.private_ip
-#   }
+tags = merge(
+    {
+        Name = "${local.common_name}-mysql"
+    },
+    local.common_tags
+)
+}
 
-#   provisioner "file" {
-#     source      = "bootstrap.sh"
-#     destination = "/tmp/bootstrap.sh"
-#   }
 
-#   provisioner "remote-exec" {
-#     inline = [
-#       "chmod +x /tmp/bootstrap.sh",
-#       "sudo sh /tmp/bootstrap.sh mysql ${var.environment}"
-#     ]
-#   }
-# }
+#provisioners
+resource "terraform_data" "mysql" {
+  triggers_replace = [
+    aws_instance.mysql.id
+  ]
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    password = "DevOps321"
+    host        = aws_instance.mysql.private_ip
+  }
+
+  provisioner "file" {
+    source      = "bootstrap.sh"
+    destination = "/tmp/bootstrap.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/bootstrap.sh",
+      "sudo sh /tmp/bootstrap.sh mysql ${var.environment}"
+    ]
+  }
+}
 
 
 # provisioner "remote-exec" {
